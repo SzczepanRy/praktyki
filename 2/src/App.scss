@@ -59,6 +59,7 @@ header {
 	.navbar {
 		@include center();
 		flex-wrap: wrap;
+		margin-right: 30px;
 		ul {
 			flex-wrap: wrap;
 			list-style: none;
@@ -75,9 +76,7 @@ header {
 			div {
 				height: 24px;
 				width: 24px;
-				margin: 0px 20px 15px;
-			}
-			&:last-child {
+				margin: 15px 20px 15px;
 			}
 		}
 	}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { contextI } from './App';
 import './Lightbox.scss';
 
