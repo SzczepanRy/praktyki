@@ -1,9 +1,8 @@
 # install
 
-install
-    react
-    react-dom
-    sass
+react
+react-dom
+sass
 
 # to run 
 npm run dev
