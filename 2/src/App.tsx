@@ -25,7 +25,7 @@ function App() {
 				}}
 				className="logoicon"
 			>
-				<div className="containe">
+				<div className="container">
 					<div className="lineL"></div>
 					<div className="lineL"></div>
 					<div className="lineS"></div>
