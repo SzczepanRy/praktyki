@@ -1,0 +1,93 @@
+@import './App.scss';
+$superlightgray: #eceef8;
+.background {
+	position: absolute;
+	background-color: rgba(95, 116, 221, 0.7);
+	height: 100vh;
+	width: 100vw;
+	@include center();
+	.mainLight {
+		background-color: $white;
+		width: 600px;
+		height: 60%;
+		padding: 20px;
+		@include center(column);
+		justify-content: flex-start;
+		.headerLight {
+			width: 100%;
+			@include center();
+			justify-content: space-between;
+			padding: 15px 0px;
+			h1 {
+				font-size: 24px;
+			}
+			.exit {
+				@include center();
+				cursor: pointer;
+				height: 16px;
+				width: 16px;
+				p {
+					font-size: 23px;
+					color: $blue;
+					display: block;
+				}
+			}
+		}
+		.jobs {
+			width: 100%;
+			overflow-y: auto;
+			.job {
+				@include center(column);
+				align-items: flex-start;
+				height: 53px;
+				border-top: 1px solid $superlightgray;
+				padding: 15px 0px;
+				h3 {
+					font-size: 16px;
+				}
+				p {
+					margin-top: 5px;
+					font-size: 12px;
+				}
+			}
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+			&::-webkit-scrollbar-track {
+				background-color: #f2f3f7;
+			}
+			&::-webkit-scrollbar-thumb {
+				background: #5f74dd;
+				height: 15px;
+				border-radius: 3px;
+			}
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+		}
+		.a {
+			height: 0px;
+		}
+		.cover {
+			z-index: 1;
+			background: linear-gradient(#ffffff00, #ffffff);
+			position: relative;
+			bottom: 95px;
+			width: 600px;
+			height: 95px;
+		}
+	}
+}
+
+@media (max-width: 720px) {
+	body {
+		overflow: hidden;
+	}
+	.cover {
+		width: 100%;
+	}
+	.mainLight {
+		height: 100vh !important;
+		width: 100vw !important;
+	}
+}
