@@ -1,21 +1,30 @@
 import { contextI } from './App';
 import './Lightbox.scss';
 
-export default function Lightbox({ setLightBoxState }: contextI) {
+import x from './img/exit.png';
+export const modal = document.querySelector<HTMLElement>('.background');
+export const container = document.querySelector<HTMLElement>('.mainLight');
+export default function Lightbox({ setBamin, setLightBoxState }: contextI) {
 	return (
 		<div className="background">
 			<div className="mainLight">
 				<div className="headerLight">
-					<h1>We're looking for</h1>
+					<h2>We're looking for</h2>
 					<div
-						onClick={() => {
-							setLightBoxState((e) => !e);
+						onClick={(e) => {
+							e.preventDefault();
+
+							setBamin('rback');
+							setTimeout(() => {
+								setLightBoxState((e) => !e);
+							}, 900);
 						}}
 						className="exit"
 					>
-						<p>x</p>
+						<img className="xIm" src={x} alt="" />
 					</div>
 				</div>
+
 				<div className="jobs">
 					<div className="job">
 						<h3>product designer</h3>

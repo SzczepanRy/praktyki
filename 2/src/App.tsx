@@ -3,33 +3,50 @@ import global from './img/PNG_Global.png';
 import fb from './img/facebook.png';
 import ig from './img/instagram.png';
 import './App.scss';
-import Lightbox from './Lightbox';
+
+import Lightbox, { modal, container } from './Lightbox';
 
 import React from 'react';
 
 export interface contextI {
 	setLightBoxState: React.Dispatch<React.SetStateAction<boolean>>;
+	setBamin: React.Dispatch<React.SetStateAction<string>>;
 }
 
+const bars = document.querySelectorAll<HTMLElement>('.bar');
+const icon = document.querySelectorAll<HTMLElement>('.logoicon');
 function App() {
 	const [LightBoxState, setLightBoxState] = React.useState<boolean>(false);
 	const [HeaderState, setHeaderState] = React.useState<boolean>(false);
+	const [Banim, setBamin] = React.useState<string>('unset');
 
 	return (
 		<>
-			{LightBoxState && <Lightbox setLightBoxState={setLightBoxState} />}
+			{LightBoxState && (
+				<div style={{ animationName: Banim }} className="a">
+					<Lightbox setBamin={setBamin} setLightBoxState={setLightBoxState} />
+				</div>
+			)}
 
 			<div
-				onClick={() => {
+				onClick={(e) => {
+					e.preventDefault();
+					bars?.forEach((bar: HTMLElement) => bar.classList.toggle('x'));
 					setHeaderState((e) => !e);
 				}}
 				className="logoicon"
 			>
-				<div className="container">
-					<div className="lineL"></div>
-					<div className="lineL"></div>
-					<div className="lineS"></div>
-				</div>
+				<a
+					style={{
+						animationName:
+							Banim === 'back' ? 'rback' : Banim === 'rback' ? 'back' : 'unset',
+					}}
+					className="nav-toggle"
+				>
+					<span className="bar x"></span>
+					<span className="bar x"></span>
+					<span id="last" className="bar x"></span>
+				</a>
 			</div>
 
 			<header
@@ -64,8 +81,17 @@ function App() {
 						<h1>Start your journey with Ivision</h1>
 						<h3>Nice to meet you. Let's work together!</h3>
 						<div
-							onClick={() => {
+							onClick={(e) => {
+								e.preventDefault();
+
+								setBamin('back');
 								setLightBoxState((e) => !e);
+
+								//container?.setAttribute('animationName', 'tran');
+								// modal?.setAttribute('animationName', 'back');
+								// modal?.setAttribute('display', 'flex');
+								//modal?.setAttribute('overflow', 'hidden');
+								//container?.style.animationName = 'tran';
 							}}
 							className="mainB"
 						>
@@ -73,6 +99,7 @@ function App() {
 						</div>
 					</div>
 				</div>
+				<div className="main-line"></div>
 				<aside>
 					<div className="Acenter">
 						<img src={global} alt="logo" />
@@ -81,8 +108,8 @@ function App() {
 							<div className="line"></div>
 						</div>
 						<p>Wieniawskiego 66/2 31-436 Kraków, Polska</p>
-						<p>tel: +48 12 44 55 840</p>
-						<p>praca@ivision.pl</p>
+						<p className="mark">tel: +48 12 44 55 840</p>
+						<p className="mark">praca@ivision.pl</p>
 					</div>
 				</aside>
 			</main>
