@@ -79,7 +79,7 @@ body {
 header {
 	width: 100vw;
 	padding: 0px 100px;
-	min-height: 80px;
+	min-height: 82px;
 	border-bottom: 2px solid $lightgray;
 	@include center();
 	justify-content: space-between;
@@ -196,17 +196,6 @@ main {
 	}
 }
 
-@keyframes tran {
-	0% {
-		left: 100%;
-		top: 100%;
-	}
-	100% {
-		left: calc(50% - 300px);
-		top: calc(50% - 334px);
-	}
-}
-
 .a {
 	animation-duration: 1s;
 	z-index: 2;
@@ -235,21 +224,29 @@ main {
 		overflow: hidden;
 	}
 	header {
-		@include center();
-		flex-direction: column;
+		animation-duration: 1s;
+		@include center(column);
+		background-color: $white;
+		justify-content: flex-start;
+		height: 100vh;
+		width: 100vw;
+		position: absolute;
 		padding: 0;
 		.title {
-			display: none !important;
+			// display: none !important;
 		}
 		.navbar {
 			padding: 0px 10px;
-			@include center();
-			.instagiram {
-				padding-left: 0;
+			@include center(column);
+			.ig {
+				padding: 0 !important;
 			}
-			li {
-				padding-right: 20px !important;
-				text-align: center;
+			ul {
+				@include center(column);
+				li {
+					padding: 10px 20px !important;
+					text-align: center;
+				}
 			}
 		}
 	}

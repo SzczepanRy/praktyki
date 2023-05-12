@@ -2,8 +2,11 @@ import { contextI } from './App';
 import './Lightbox.scss';
 
 import x from './img/exit.png';
+
 export const modal = document.querySelector<HTMLElement>('.background');
 export const container = document.querySelector<HTMLElement>('.mainLight');
+
+//recexing the verables form the app.tsx file
 export default function Lightbox({ setBamin, setLightBoxState }: contextI) {
 	return (
 		<div className="background">
@@ -13,7 +16,7 @@ export default function Lightbox({ setBamin, setLightBoxState }: contextI) {
 					<div
 						onClick={(e) => {
 							e.preventDefault();
-
+							//changing states
 							setBamin('rback');
 							setTimeout(() => {
 								setLightBoxState((e) => !e);

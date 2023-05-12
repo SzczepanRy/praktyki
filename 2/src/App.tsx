@@ -8,21 +8,28 @@ import Lightbox, { modal, container } from './Lightbox';
 
 import React from 'react';
 
+//defining a coustom type
 export interface contextI {
 	setLightBoxState: React.Dispatch<React.SetStateAction<boolean>>;
 	setBamin: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const icon = document.querySelectorAll<HTMLElement>('.logoicon');
 function App() {
+	//setting booelan default states
 	const [LightBoxState, setLightBoxState] = React.useState<boolean>(false);
 	const [HeaderState, setHeaderState] = React.useState<boolean>(false);
+	//setting booelan default states
 	const [Banim, setBamin] = React.useState<string>('none');
+	const [MenuAmination, setMenuAmination] = React.useState<string>('none');
+	const [MenuActive, setMenuActive] = React.useState<string>('flex');
 
 	return (
 		<>
+			{/* if the LightBoxState == true than we return a jsx element  */}
 			{LightBoxState && (
+				// styling based on Banim
 				<div style={{ animationName: Banim }} className="a">
+					{/* sending verables to lightbox.tsx */}
 					<Lightbox setBamin={setBamin} setLightBoxState={setLightBoxState} />
 				</div>
 			)}
@@ -31,14 +38,28 @@ function App() {
 				onClick={(e) => {
 					e.preventDefault();
 					const bars = document.querySelectorAll<HTMLElement>('.bar');
-
 					bars?.forEach((bar: HTMLElement) => bar.classList.toggle('x'));
-					setHeaderState((e) => !e);
+					//setting states for
+					if (HeaderState === true) {
+						//turning the menu on
+						setHeaderState((e) => !e);
+						setMenuAmination('back');
+						setMenuActive('flex');
+					} else {
+						//turning the menu off
+						setMenuAmination('rback');
+						setTimeout(async () => {
+							setHeaderState((e) => !e);
+							setMenuActive('none');
+						}, 900);
+					}
 				}}
 				className="logoicon"
 			>
 				<a
 					style={{
+						//assinghning types to nav-toggle by monitoring the  Banim verable
+						//(Button animation)
 						animationName:
 							Banim === 'back' ? 'rback' : Banim === 'rback' ? 'back' : 'none',
 					}}
@@ -51,7 +72,8 @@ function App() {
 			</div>
 
 			<header
-				style={HeaderState ? { display: 'none' } : { display: 'flex' }}
+				//assinghning types to header by monitoring the MenuActive and MenuAmination verable
+				style={{ display: MenuActive, animationName: MenuAmination }}
 				className="header"
 			>
 				<div className="title">
@@ -84,15 +106,9 @@ function App() {
 						<div
 							onClick={(e) => {
 								e.preventDefault();
-
+								//changing state
 								setBamin('back');
 								setLightBoxState((e) => !e);
-
-								//container?.setAttribute('animationName', 'tran');
-								// modal?.setAttribute('animationName', 'back');
-								// modal?.setAttribute('display', 'flex');
-								//modal?.setAttribute('overflow', 'hidden');
-								//container?.style.animationName = 'tran';
 							}}
 							className="mainB"
 						>
