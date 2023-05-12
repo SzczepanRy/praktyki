@@ -13,12 +13,11 @@ export interface contextI {
 	setBamin: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const bars = document.querySelectorAll<HTMLElement>('.bar');
 const icon = document.querySelectorAll<HTMLElement>('.logoicon');
 function App() {
 	const [LightBoxState, setLightBoxState] = React.useState<boolean>(false);
 	const [HeaderState, setHeaderState] = React.useState<boolean>(false);
-	const [Banim, setBamin] = React.useState<string>('unset');
+	const [Banim, setBamin] = React.useState<string>('none');
 
 	return (
 		<>
@@ -31,6 +30,8 @@ function App() {
 			<div
 				onClick={(e) => {
 					e.preventDefault();
+					const bars = document.querySelectorAll<HTMLElement>('.bar');
+
 					bars?.forEach((bar: HTMLElement) => bar.classList.toggle('x'));
 					setHeaderState((e) => !e);
 				}}
@@ -39,7 +40,7 @@ function App() {
 				<a
 					style={{
 						animationName:
-							Banim === 'back' ? 'rback' : Banim === 'rback' ? 'back' : 'unset',
+							Banim === 'back' ? 'rback' : Banim === 'rback' ? 'back' : 'none',
 					}}
 					className="nav-toggle"
 				>

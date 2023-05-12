@@ -13,6 +13,7 @@ $superlightgray: #eceef8;
 	width: 100vw;
 	@include center();
 	.mainLight {
+		z-index: 2;
 		position: absolute;
 		border-radius: 3px;
 		background-color: $white;
@@ -102,7 +103,6 @@ $superlightgray: #eceef8;
 		overflow: hidden !important;
 	}
 	.mainLight {
-		z-index: 3 !important;
 		animation-duration: 0s !important;
 		height: 100% !important;
 		width: 100% !important;
@@ -112,5 +112,13 @@ $superlightgray: #eceef8;
 		width: 100% !important;
 		left: 0px !important;
 		bottom: 0px !important;
+	}
+}
+
+@media (max-height: 668px) {
+	.mainLight {
+		animation-duration: 0s !important;
+		height: 100% !important;
+		width: 100% !important;
 	}
 }
