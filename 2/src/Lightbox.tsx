@@ -1,13 +1,28 @@
 import { contextI } from './App';
-import './Lightbox.scss';
+import './style/Lightbox.scss';
 
 import x from './img/exit.png';
-
+import { getJobs } from './api';
+import { useQuery } from 'react-query';
 export const modal = document.querySelector<HTMLElement>('.background');
 export const container = document.querySelector<HTMLElement>('.mainLight');
 
+interface attribJobsI {
+	city: string;
+	jobTitle: string;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+}
+
+interface jobsI {
+	id: number;
+	attributes: attribJobsI;
+}
+
 //recexing the verables form the app.tsx file
 export default function Lightbox({ setBamin, setLightBoxState }: contextI) {
+	const { data: jobs, isError } = useQuery<jobsI[]>('jobs', getJobs);
 	return (
 		<div className="background">
 			<div className="mainLight">
@@ -29,78 +44,12 @@ export default function Lightbox({ setBamin, setLightBoxState }: contextI) {
 				</div>
 
 				<div className="jobs">
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
-					<div className="job">
-						<h3>product designer</h3>
-						<p>Cracow</p>
-					</div>
+					{jobs?.map((el: jobsI) => (
+						<div className="job">
+							<h3>{!isError ? el.attributes.jobTitle : 'faled to fetch'}</h3>
+							<p>{!isError ? el.attributes.city : 'faled to fetch'}</p>
+						</div>
+					))}
 				</div>
 				<div className="a">
 					<div className="cover"></div>

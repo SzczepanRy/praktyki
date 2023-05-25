@@ -2,9 +2,10 @@ import image from './img/image.png';
 import global from './img/PNG_Global.png';
 import fb from './img/facebook.png';
 import ig from './img/instagram.png';
-import './App.scss';
-
-import Lightbox, { modal, container } from './Lightbox';
+import './style/App.scss';
+import { getMain, getMenu } from './api';
+import { useQuery } from 'react-query';
+import Lightbox from './Lightbox';
 
 import React from 'react';
 
@@ -12,6 +13,34 @@ import React from 'react';
 export interface contextI {
 	setLightBoxState: React.Dispatch<React.SetStateAction<boolean>>;
 	setBamin: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface attribI {
+	title: string;
+	address: string;
+	tel: string;
+	email: string;
+	grayText: string;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+}
+
+interface mainI {
+	id: number;
+	attributes: attribI;
+}
+
+interface menuMenuI {
+	menu: string[];
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+}
+
+interface menuI {
+	id: number;
+	attributes: menuMenuI;
 }
 
 function App() {
@@ -22,6 +51,9 @@ function App() {
 	const [Banim, setBamin] = React.useState<string>('none');
 	const [MenuAmination, setMenuAmination] = React.useState<string>('none');
 	const [MenuActive, setMenuActive] = React.useState<string>('flex');
+
+	const { data: main, isError: errorMain } = useQuery<mainI>('main', getMain);
+	const { data: menu, isError: errorMenu } = useQuery<menuI>('menu', getMenu);
 
 	return (
 		<>
@@ -81,10 +113,10 @@ function App() {
 				</div>
 				<div className="navbar">
 					<ul>
-						<li>strona główna</li>
-						<li>usługi</li>
-						<li>o firmie</li>
-						<li>kontakt</li>
+						<li>{!errorMenu ? menu?.attributes.menu[0] : 'error fetching'}</li>
+						<li>{!errorMenu ? menu?.attributes.menu[1] : 'error fetching'}</li>
+						<li>{!errorMenu ? menu?.attributes.menu[2] : 'error fetching'}</li>
+						<li>{!errorMenu ? menu?.attributes.menu[3] : 'error fetching'}</li>
 					</ul>
 					<div className="social">
 						<div className="fb">
@@ -101,8 +133,8 @@ function App() {
 				<div className="main">
 					<div className="Mcenter">
 						<img src={image} alt="logo" />
-						<h1>Start your journey with Ivision</h1>
-						<h3>Nice to meet you. Let's work together!</h3>
+						<h1>{!errorMain ? main?.attributes.title : 'error fetching'}</h1>
+						<h3>{!errorMain ? main?.attributes.grayText : 'error fetching'}</h3>
 						<div
 							onClick={(e) => {
 								e.preventDefault();
@@ -124,9 +156,13 @@ function App() {
 						<div className="spaser">
 							<div className="line"></div>
 						</div>
-						<p>Wieniawskiego 66/2 31-436 Kraków, Polska</p>
-						<p className="mark">tel: +48 12 44 55 840</p>
-						<p className="mark">praca@ivision.pl</p>
+						<p>{!errorMain ? main?.attributes.address : 'error fetching'}</p>
+						<p className="mark">
+							{!errorMain ? main?.attributes.tel : 'error fetching'}
+						</p>
+						<p className="mark">
+							{!errorMain ? main?.attributes.email : 'error fetching'}
+						</p>
 					</div>
 				</aside>
 			</main>
