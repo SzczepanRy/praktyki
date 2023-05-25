@@ -1,5 +1,6 @@
 # install
-
+reaact-query
+axiois
 react
 react-dom
 sass
